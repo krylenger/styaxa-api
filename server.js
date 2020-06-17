@@ -4,12 +4,25 @@ const app = express();
 
 app.use(express.json());
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
+    }
+});
+
 app.get('/', (req, res) => {
     res.json('home')
 })
 
 app.post('/paymentConfirmation', (req, res) => {
-    console.log(req.body);
+    const { payment } = req.body;
+    db('paymentlogs').insert({
+        name: payment
+    }).then(console.log)
     res.status(200).json('working')
 })
 
