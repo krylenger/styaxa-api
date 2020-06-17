@@ -24,6 +24,7 @@ app.post('/paymentConfirmation', (req, res) => {
     db('paymentlogs').insert({
         name: payment
     }).then(console.log)
+    console.log(req.body);
     res.status(200).json('working')
 })
 
