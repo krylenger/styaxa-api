@@ -25,8 +25,7 @@ app.post('/paymentConfirmation', (req, res) => {
     db('paymentlogs').insert({
         name: notification_type,
         amount: amount,
-        sha1_hash: sha1_hash,
-        date_time: datetime
+        sha1_hash: sha1_hash
     }).then(console.log)
     console.log(req.body);
     res.status(200).json('working')
