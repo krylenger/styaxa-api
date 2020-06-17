@@ -13,6 +13,6 @@ app.post('/paymentConfirmation', (req, res) => {
     res.status(200).json('working')
 })
 
-app.listen(4000, () => {
-    console.log('server is working!')
+app.listen(process.env.PORT || 4000, () => {
+    console.log(`server is running on ${process.env.PORT} !`)
 })
