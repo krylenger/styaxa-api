@@ -24,7 +24,6 @@ app.post('/paymentConfirmation', (req, res) => {
     const { notification_type, amount, sha1_hash, datetime } = req.body;
     db('paymentlogs').insert({
         name: notification_type,
-        amount: amount,
         sha1_hash: sha1_hash,
         date_time: datetime
     }).then(console.log)
