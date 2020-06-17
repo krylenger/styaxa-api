@@ -3,6 +3,7 @@ const knex = require('knex');
 
 const app = express();
 
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -24,7 +25,7 @@ app.post('/paymentConfirmation', (req, res) => {
     db('paymentlogs').insert({
         name: notification_type
     }).then(console.log)
-    console.log(req.body);
+    console.log(notification_type);
     res.status(200).json('working')
 })
 
