@@ -20,9 +20,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/paymentConfirmation', (req, res) => {
-    const { payment } = req.body;
+    const { notification_type } = req.body;
     db('paymentlogs').insert({
-        name: payment
+        name: notification_type
     }).then(console.log)
     console.log(req.body);
     res.status(200).json('working')
