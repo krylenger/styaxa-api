@@ -24,14 +24,18 @@ app.get('/', (req, res) => {
 app.post('/paymentConfirmation', (req, res) => {
     const { notification_type, operation_id, amount, currency, datetime, sender, codepro, label, sha1_hash } = req.body;
     let queryString = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&TnRBii6WbYjljn5Lw8QF1uQ1&${label}`;
-    
-    db('paymentlogs').insert({
-        name: SHA1(queryString).toString(),
-        sha1_hash: sha1_hash,
-        date_time: datetime
-    }).then(console.log)
-    console.log(req.body);
-    res.status(200).json('working')
+    let heshString = HA1(queryString).toString();
+    if (sha1_hash === heshString) {
+        db('paymentlogs').insert({
+            name: notification_type,
+            sha1_hash: sha1_hash,
+            date_time: datetime
+        }).then(console.log)
+        console.log(req.body);
+        res.status(200).json('working');
+    } else {
+        res.status(400).json('hash is different');
+    }
 })
 
 app.listen(process.env.PORT || 4000, () => {
