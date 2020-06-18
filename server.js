@@ -21,10 +21,11 @@ app.get('/', (req, res) => {
 })
 
 app.post('/paymentConfirmation', (req, res) => {
-    const { notification_type, amount, sha1_hash, datetime } = req.body;
+    const { notification_type, operation_id, amount, currency, datetime, sender, codepro, label  } = req.body;
+    let queryString = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${label}`
     db('paymentlogs').insert({
-        name: req.body,
-        sha1_hash: sha1_hash,
+        name: queryString,
+        // sha1_hash: sha1_hash,
         date_time: datetime
     }).then(console.log)
     console.log(req.body);
