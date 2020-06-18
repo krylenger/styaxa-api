@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.post('/paymentConfirmation', (req, res) => {
     const { notification_type, operation_id, amount, currency, datetime, sender, codepro, label  } = req.body;
-    let queryString = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&TnRBii6WbYjljn5Lw8QF1uQ1${label}`
+    let queryString = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&TnRBii6WbYjljn5Lw8QF1uQ1&${label}`
     db('paymentlogs').insert({
         name: queryString,
         // sha1_hash: sha1_hash,
