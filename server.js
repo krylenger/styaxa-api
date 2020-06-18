@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 app.post('/paymentConfirmation', (req, res) => {
     const { notification_type, operation_id, amount, currency, datetime, sender, codepro, label, sha1_hash } = req.body;
     let queryString = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&TnRBii6WbYjljn5Lw8QF1uQ1&${label}`;
-    let heshString = HA1(queryString).toString();
+    let heshString = SHA1(queryString).toString();
     if (sha1_hash === heshString) {
         db('paymentlogs').insert({
             name: notification_type,
